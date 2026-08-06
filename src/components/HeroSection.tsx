@@ -1,10 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Sparkles, Layers, Zap, ArrowUpRight, PlayCircle } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+import { ArrowRight, Sparkles, ShieldCheck, Award } from 'lucide-react';
 
 export default function HeroSection() {
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -15,30 +15,49 @@ export default function HeroSection() {
     },
   };
 
-  const itemVariants = {
-    hidden: { y: 40, opacity: 0 },
+  const itemVariants: Variants = {
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+      transition: { duration: 0.8, ease: 'easeOut' },
     },
   };
 
   return (
     <section 
-      id="hero" 
+      id="hero"
       style={{
-        minHeight: '100vh',
         position: 'relative',
+        minHeight: '88vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '140px 24px 80px',
-        background: 'radial-gradient(ellipse at 50% 30%, rgba(0, 242, 254, 0.08) 0%, rgba(127, 0, 255, 0.03) 50%, transparent 80%)'
+        padding: '120px 24px 80px',
+        overflow: 'hidden',
+        /* Rich warm leather imagery background overlay matching Screenshot 1 */
+        backgroundImage: `linear-gradient(180deg, rgba(24, 17, 11, 0.45) 0%, rgba(140, 98, 57, 0.35) 50%, rgba(24, 17, 11, 0.65) 100%), url('https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=2000&q=85')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        color: '#FFFFFF'
       }}
     >
+      {/* Background Soft Lighting Radial Glow */}
       <div style={{
-        maxWidth: '1100px',
+        position: 'absolute',
+        top: '20%',
+        left: '50%',
+        transform: 'translate(-50%, -20%)',
+        width: '700px',
+        height: '400px',
+        background: 'radial-gradient(ellipse at center, rgba(212, 175, 55, 0.25) 0%, rgba(140, 98, 57, 0.15) 50%, transparent 80%)',
+        filter: 'blur(90px)',
+        pointerEvents: 'none'
+      }} />
+
+      <div style={{
+        maxWidth: '960px',
         width: '100%',
         margin: '0 auto',
         textAlign: 'center',
@@ -51,103 +70,109 @@ export default function HeroSection() {
           animate="visible"
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
         >
-          {/* Top Pill Badge */}
-          <motion.div variants={itemVariants} className="glass-pill" style={{ marginBottom: '24px' }}>
-            <Sparkles size={16} color="var(--accent-cyan)" />
-            <span>Next.js 14+ & High Performance Motion Pipeline</span>
+          {/* Atelier Badge */}
+          <motion.div 
+            variants={itemVariants}
+            style={{
+              background: 'rgba(255, 255, 255, 0.12)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              padding: '8px 24px',
+              borderRadius: '9999px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              marginBottom: '32px',
+              color: '#F4EFE6'
+            }}
+          >
+            <Sparkles size={16} color="var(--accent-gold)" />
+            <span>EST. 2025 • NIGERIAN HERITAGE & FOOTBALL BOOT ATELIER</span>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* Headline matching screenshot 1 serif style */}
           <motion.h1 
             variants={itemVariants}
             style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4.75rem)',
-              fontWeight: 800,
+              fontFamily: 'var(--font-serif)',
+              fontSize: 'clamp(2.8rem, 6.5vw, 5.25rem)',
+              fontWeight: 700,
+              lineHeight: 1.05,
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
               maxWidth: '900px',
               marginBottom: '24px',
-              lineHeight: 1.08,
+              color: '#FFFFFF',
+              textShadow: '0 4px 20px rgba(0, 0, 0, 0.4)'
             }}
           >
-            Craft Stunning Web Experiences with <span className="gradient-text">GSAP & Framer Motion</span>
+            ARTISAN <br />
+            <span style={{ color: 'var(--accent-gold)' }}>CRAFTSMANSHIP</span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p 
             variants={itemVariants}
             style={{
+              fontFamily: 'var(--font-sans)',
               fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-              color: 'var(--text-secondary)',
+              color: '#F4EFE6',
               maxWidth: '680px',
-              marginBottom: '40px',
-              fontWeight: 400
+              marginBottom: '44px',
+              fontWeight: 400,
+              lineHeight: 1.6,
+              textShadow: '0 2px 10px rgba(0,0,0,0.5)'
             }}
           >
-            Pre-configured Next.js template integrated with TypeScript, GSAP ScrollTrigger, Lenis momentum smooth scrolling, and Framer Motion layout physics.
+            Handcrafted luxury footwear and elite football boots designed to stand the test of time on and off the pitch.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div 
-            variants={itemVariants}
-            style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '64px' }}
-          >
+          {/* Primary Action Button */}
+          <motion.div variants={itemVariants}>
             <motion.a 
-              whileHover={{ scale: 1.04 }} 
-              whileTap={{ scale: 0.96 }} 
-              href="#gsap-section" 
-              className="btn-primary"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              href="#collection" 
+              className="btn-saddle"
+              style={{
+                padding: '18px 48px',
+                fontSize: '1rem',
+                backgroundColor: 'var(--accent-saddle)',
+                borderColor: 'var(--accent-gold)',
+                boxShadow: '0 8px 30px rgba(140, 98, 57, 0.5)'
+              }}
             >
-              <Zap size={18} /> Test GSAP Animations
-            </motion.a>
-            <motion.a 
-              whileHover={{ scale: 1.04 }} 
-              whileTap={{ scale: 0.96 }} 
-              href="#framer-section" 
-              className="btn-secondary"
-            >
-              <PlayCircle size={18} /> View Framer Cards
+              EXPLORE COLLECTION <ArrowRight size={18} />
             </motion.a>
           </motion.div>
 
-          {/* Key Tech Cards */}
+          {/* Trust Highlights */}
           <motion.div 
             variants={itemVariants}
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '24px',
-              width: '100%',
-              marginTop: '20px'
+              display: 'flex',
+              gap: '40px',
+              marginTop: '64px',
+              justifyContent: 'center',
+              flexWrap: 'wrap'
             }}
           >
-            <motion.div 
-              whileHover={{ y: -8, borderColor: 'var(--accent-cyan)' }}
-              className="glass-panel" 
-              style={{ padding: '32px 24px', textAlign: 'left' }}
-            >
-              <div style={{ color: 'var(--accent-cyan)', marginBottom: '16px' }}><Zap size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>GSAP 3 & ScrollTrigger</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Full timeline control, complex SVG morphing, and pinned scroll sequences optimized for 60FPS.</p>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -8, borderColor: 'var(--accent-blue)' }}
-              className="glass-panel" 
-              style={{ padding: '32px 24px', textAlign: 'left' }}
-            >
-              <div style={{ color: 'var(--accent-blue)', marginBottom: '16px' }}><Layers size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Framer Motion</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Spring physics, declarative gesture controls, shared layout transitions, and exit animations.</p>
-            </motion.div>
-
-            <motion.div 
-              whileHover={{ y: -8, borderColor: 'var(--accent-purple)' }}
-              className="glass-panel" 
-              style={{ padding: '32px 24px', textAlign: 'left' }}
-            >
-              <div style={{ color: 'var(--accent-purple)', marginBottom: '16px' }}><Sparkles size={32} /></div>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Lenis Smooth Scroll</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>Inertia momentum scrolling synchronized directly with GSAP ticker loop without main thread lag.</p>
-            </motion.div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#F4EFE6', fontSize: '0.875rem' }}>
+              <ShieldCheck size={18} color="var(--accent-gold)" />
+              <span>Full-Grain Italian Leather</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#F4EFE6', fontSize: '0.875rem' }}>
+              <Award size={18} color="var(--accent-gold)" />
+              <span>Custom Molded Cleat Soles</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#F4EFE6', fontSize: '0.875rem' }}>
+              <Sparkles size={18} color="var(--accent-gold)" />
+              <span>Bespoke Hand Stitching</span>
+            </div>
           </motion.div>
         </motion.div>
       </div>
